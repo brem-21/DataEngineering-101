@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from src.polygon import polygon, save_to_csv
+from src.polygon import polygon
 
 load_dotenv()
 
