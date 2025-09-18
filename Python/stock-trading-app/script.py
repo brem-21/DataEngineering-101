@@ -21,5 +21,7 @@ while 'next_url' in data:
     url = data['next_url'] + f"&apiKey={API_KEY}"
     response = requests.get(url)
     data = response.json()
+    print(data)
     for ticker in data['results']:
         tickers.append(ticker)
+
