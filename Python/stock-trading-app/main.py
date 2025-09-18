@@ -5,7 +5,7 @@ from src.polygon import polygon
 load_dotenv()
 
 limit = 100
-API_KEY = os.getenv('POLYGON_API_KEY')
+API_KEY = os.getenv("POLYGON_API_KEY")
 url = f"https://api.polygon.io/v3/reference/tickers?market=stocks&limit={limit}&apiKey={API_KEY}"
 
 try:
@@ -20,4 +20,3 @@ else:
         print("All tickers saved per record to tickers.csv")
 finally:
     print("Connection closed")
-
