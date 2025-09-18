@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from src.polygon import polygon
+from src.polygon import polygon, save_to_csv
 
 load_dotenv()
 
@@ -19,10 +19,12 @@ else:
     print(tickers)
     records = len(tickers)
     print(f"Total tickers fetched: {records}")
-    
+
     # Handle pagination if records exceed limit
     if records > limit and 'next_url' in data:
         get_data.paginate_tickers(data)
         print(f"Total tickers after pagination: {len(tickers)}")
+        save = save_to_csv(tickers)
 finally:
     print("Connection closed")
+

@@ -1,4 +1,5 @@
 import requests
+import csv
 
 class polygon:
     """Ingestion of stock ticker data from Polygon.io API."""
@@ -42,3 +43,17 @@ class polygon:
                     print(data)
                     for ticker in data['results']:
                         tickers.append(ticker)
+
+class save_to_csv:
+    """Save tickers to CSV file."""
+    def __init__(self, tickers):
+        self.tickers = tickers
+
+    def save_to_csv(self):
+        """Save tickers to CSV file."""
+        with open('tickers.csv', 'w', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=self.tickers[0].keys())
+            writer.writeheader()
+            for ticker in self.tickers:
+                writer.writerow(ticker)
+        print("Tickers saved to CSV file.")
