@@ -1,0 +1,11 @@
+black
+jupyter
+openai
+pandas
+python-dotenv
+requests
+pyspark
+matplotlib
+seaborn
+spark
+pylint
