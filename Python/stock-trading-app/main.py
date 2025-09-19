@@ -1,4 +1,5 @@
 """Main module to run the stock trading app."""
+
 import os
 from dotenv import load_dotenv
 from src.polygon import polygon

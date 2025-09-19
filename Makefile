@@ -5,8 +5,7 @@ format:
 	uv run black Python/stock-trading-app/*.py
 
 lint:
-	uv run pylint Python/stock-trading-app/*py
+	uv run pylint Python/stock-trading-app/*.py
 
 
-all:
-	install format lint
+all: install format lint
