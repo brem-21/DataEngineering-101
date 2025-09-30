@@ -1,6 +1,8 @@
 import requests
 import csv
 import os
+import time
+import json
 
 
 class polygon:
@@ -27,20 +29,28 @@ class polygon:
             return []
 
         # Save initial batch per record
+        print(f"Records in page: {len(data['results'])}")
         for ticker in data["results"]:
+            print(json.dumps(ticker, indent=2))
             save_to_csv([ticker]).save_to_csv()
 
-        # Handle pagination
+        # Handle pagination with rate limiting
         while "next_url" in data:
             try:
+                time.sleep(12)  # Wait 12 seconds (5 requests/minute limit)
                 url = data["next_url"] + f"&apiKey={self.api_key}"
                 response = requests.get(url)
                 response.raise_for_status()
                 data = response.json()
+                print(f"Records in page: {len(data['results'])}")
                 for ticker in data["results"]:
+                    print(json.dumps(ticker, indent=2))
                     save_to_csv([ticker]).save_to_csv()
             except requests.exceptions.RequestException as e:
                 print(f"Error in pagination: {e}")
+                if "429" in str(e):
+                    time.sleep(60)  # Wait 1 minute on rate limit
+                    continue
                 break
 
         return data["results"] if data else []
